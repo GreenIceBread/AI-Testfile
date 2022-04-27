@@ -11,19 +11,28 @@ class Ai():
     self.width = width
     self.mines = mines
     self.offsets = [(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1),(-1,-1)]
-    self.boundaries = []
     self.corners = [(1,-1,1,0,0,-1),
            (1,1,1,0,0,1),
            (-1,-1,0,-1,-1,0),
            (-1,1,-1,0,0,1)]
+    self.visited = []
+    self.possibleCoords = []
+    #self.boundaries = self.getBoundaries()
 
-  def getMove(self):
-    move,row,column = self._chooseMove()
+  def getMove(self, currentRow, currentColumn):
+    move, row, column = self._chooseMove(currentRow, currentColumn)
+    self.visited.append((row,column))
     return move,row,column
 
   def randomMove(self):
-    row = random.randint(0, self.height)
-    column = random.randint(0, self.width)
+    valid = False
+    while not valid:
+      row = random.randint(0, self.height - 1)
+      column = random.randint(0, self.width - 1)
+      if self.topGrid[row][column] == "-":
+        valid = True
+      else:
+        valid = False
     move = "U"
     return move, row, column
 
@@ -40,14 +49,14 @@ class Ai():
     row = coord[0]
     column = coord[1]
     move = "F"
-    return row, column, move
+    return move, row, column
 
   def getUncoverCoord(self):
     coord = self.uncoverStack.pop()
     row = coord[0]
     column = coord[1]
     move = "U"
-    return row, column, move
+    return move, row, column
 
   def offsetCoord(self, row, column):
     for i in range(len(self.offsets)):
@@ -57,7 +66,7 @@ class Ai():
       if offsetRow in range(0, self.height) and offsetColumn in range(0, self.width):
         return offsetRow, offsetColumn
 
-  def boundaries(self):
+  def getBoundaries(self):
     boundaries = []
     for y in range(self.height):
       for x in range(self.width):
@@ -66,7 +75,23 @@ class Ai():
           if self.topGrid[offsetRow][offsetColumn] in [1,2,3,4,5,6,7,8]:
             boundaries.append((y,x))
             break
-    self.boundaries = boundaries
+    return boundaries
+
+  def getPossibleCoords(self):
+    row = 0
+    column = 0
+    boundaries = self.getBoundaries()
+    for coord in boundaries:
+      if coord not in self.possibleCoords and coord not in self.visited:
+        self.possibleCoords.append(coord)
+    if len(self.possibleCoords) != 0:
+      coord = self.possibleCoords[-1]
+      self.possibleCoords.remove(coord)
+      row = coord[0]
+      column = coord[1]
+      return row, column
+    else:
+      return -1,-1
 
   def countFlags(self,row,column):
     countF = 0
@@ -85,37 +110,81 @@ class Ai():
       countS += 1
       spacesS.append((offsetRow,offsetColumn))
     return countS, spacesS
-
-  def _chooseMove(self):
+    
+  def _checkMove(self):
     if self.stackFlag._isEmpty == False:
-      row, column, move = self.getFlagCoord()
+      move, row, column = self.getFlagCoord()
+      return move, row, column
     else:
-      if self.uncoverStack._isEmpty == False:
-        row, column, move = self.getUncoverCoord()
+      if self.stackUncover._isEmpty == False:
+        move, row, column = self.getUncoverCoord()
+        return move, row, column 
       else:
-        self.stuff()
+        return " ", 0, 0
 
-  def stuff(self):
-    pass
-
-  def lol(self,row, column):
+  def _chooseMove(self, currentRow, currentColumn):
+    move, newRow, newColumn = self._checkMove()
+    if move == " ":
+      found = self.compare(currentRow,currentColumn)
+      if found == True:
+        move, newRow, newColumn = self._checkMove()
+        return move, newRow, newColumn
+      elif found == False:
+        newRow, newColumn = self.getPossibleCoords()
+        if currentRow == -1: # if the get possible coords is empty
+          move, newRow, newColumn = self.randomMove()
+          return move, newRow, newColumn
+        else:
+          for i in range(len(self.possibleCoords)):
+            found = self.compare(currentRow, currentColumn)
+          if found == True:
+            move, newRow, newColumn = self._checkMove()
+            return move, newRow, newColumn
+    elif move != " ":
+      return move, newRow, newColumn
+      
+  def compare(self,row, column):
     number = self.topGrid[row][column]
     countF, spacesF = self.countFlags(row, column)
     countS, spacesS = self.countSpaces(row,column)
-    if countS == number:
+    if countF == number:
+      if countS != 0:
+        for i in range(len(spacesS)):
+          coord = spacesS[i]
+          row = coord[0]
+          column = coord[1]
+          self.addUncover(row,column)
+          found = True
+          return found
+      elif countS == 0:
+        found = False
+        return found
+    elif countS == number:
       if countF == 0:
         for i in range(len(spacesS)):
           coord = spacesS[i]
           row = coord[0]
           column = coord[1]
           self.addFlag(row,column)
+          found = True
+          return found
       elif countF != 0:
-        pass
-    elif countF == number:
-      if countS != 0:
-        for i in range(len(spacesS)):
-          coord = spacesS[i]
-          row = coord[0]
+        found = False
+        return found
+    elif countF + countS == number:
+      for i in range(len(spacesS)):
+        coord = spacesS[i]
+        row = coord[0]
+        column = coord[1]
+        self.addFlag(row,column)
+        found = True
+        return found
+    else:
+      found = False
+      return found
+      #if there are no coords to add to the stack then pick a new possible coordinate
+    
+    
       
           
       

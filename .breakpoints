@@ -1,0 +1,116 @@
+{
+  "files": {
+    "ai.py": [
+      {
+        "id": "7b83634d-c2be-434c-a103-76f125b08153",
+        "line": 24,
+        "version": 6331,
+        "index": 680
+      },
+      {
+        "id": "ada52cd4-d8b0-4eef-bf2a-6551f3d2e305",
+        "line": 25,
+        "version": 6331,
+        "index": 718
+      },
+      {
+        "id": "0e86086d-5950-40d1-9987-c501233e3402",
+        "line": 92,
+        "version": 6331,
+        "index": 2602
+      },
+      {
+        "id": "c094129a-c0a5-4e9e-9095-f897169f5ca4",
+        "line": 94,
+        "version": 6331,
+        "index": 2637
+      },
+      {
+        "id": "e913e2f2-b78c-4e1d-894a-2198a55cbd75",
+        "line": 131,
+        "version": 6331,
+        "index": 3777
+      },
+      {
+        "id": "593e095f-3a8d-4c2b-b4bf-f2e9edb8da82",
+        "line": 136,
+        "version": 6331,
+        "index": 4017
+      },
+      {
+        "id": "f11b4366-1f14-4c36-8305-b1ad7a6a5c37",
+        "line": 142,
+        "version": 6331,
+        "index": 4268
+      },
+      {
+        "id": "528e5ce7-b6db-4050-a222-8d30944c9290",
+        "line": 144,
+        "version": 6331,
+        "index": 4333
+      },
+      {
+        "id": "f58bd4f3-c45e-4cf3-bc1a-838959d9dd08",
+        "line": 158,
+        "version": 6331,
+        "index": 4779
+      },
+      {
+        "id": "f37e9054-49f2-4280-8e94-223bdfa87746",
+        "line": 161,
+        "version": 6331,
+        "index": 4848
+      },
+      {
+        "id": "da74228a-145c-443f-9781-fcd534f0931f",
+        "line": 170,
+        "version": 6331,
+        "index": 5096
+      },
+      {
+        "id": "ed79d20a-ceb0-48fd-9ed4-ae1c2bcc5eed",
+        "line": 173,
+        "version": 6331,
+        "index": 5165
+      },
+      {
+        "id": "02ae72b3-6bf3-4ee5-9149-425ce0ade74d",
+        "line": 181,
+        "version": 6331,
+        "index": 5388
+      },
+      {
+        "id": "33a26358-9e8e-4d10-8f4c-5034edd16916",
+        "line": 184,
+        "version": 6331,
+        "index": 5439
+      }
+    ],
+    "game.py": [
+      {
+        "id": "e659e18e-d6bb-4590-acc5-d266b306cc1d",
+        "line": 41,
+        "version": 1360,
+        "index": 1102
+      },
+      {
+        "id": "c61abfcc-b6d3-4d3f-a3a7-d06fc2425e29",
+        "line": 42,
+        "version": 1360,
+        "index": 1173
+      },
+      {
+        "id": "5d483c4b-1169-438b-9cc9-c505e5b5b0b2",
+        "line": 47,
+        "version": 1360,
+        "index": 1326
+      },
+      {
+        "id": "5f1864f6-c894-4fa0-bc6c-eac857ee311a",
+        "line": 48,
+        "version": 1360,
+        "index": 1394
+      }
+    ]
+  }
+}
