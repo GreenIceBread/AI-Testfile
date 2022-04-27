@@ -39,6 +39,8 @@ class PlayGame:
       #self.aiBoard.showGrid(self.aiBoard.dataGrid)
       while True:
         move, row, column = self.ai.getMove(currentRow, currentColumn)
+        currentRow = row
+        currentColumn = column
         if row in range(0, self.height) and column in range(0, self. width):
           break
         else:

@@ -59,8 +59,7 @@ class Ai():
     return move, row, column
 
   def offsetCoord(self, row, column):
-    for i in range(len(self.offsets)):
-      offset = self.offsets[i]
+    for offset in self.offsets:
       offsetRow = offset[0] + row
       offsetColumn = offset[1] + column
       if offsetRow in range(0, self.height) and offsetColumn in range(0, self.width):
@@ -70,11 +69,12 @@ class Ai():
     boundaries = []
     for y in range(self.height):
       for x in range(self.width):
-        if self.topGrid[y][x] != " ":
+        if self.topGrid[y][x] == " ":
           offsetRow, offsetColumn = self.offsetCoord(y,x)
           if self.topGrid[offsetRow][offsetColumn] in [1,2,3,4,5,6,7,8]:
-            boundaries.append((y,x))
-            break
+            if (offsetRow,offsetColumn) not in boundaries:
+              boundaries.append((offsetRow,offsetColumn))
+            
     return boundaries
 
   def getPossibleCoords(self):
@@ -91,7 +91,9 @@ class Ai():
       column = coord[1]
       return row, column
     else:
-      return -1,-1
+      row = -1
+      column = -1
+      return row, column
 
   def countFlags(self,row,column):
     countF = 0
@@ -131,7 +133,7 @@ class Ai():
         return move, newRow, newColumn
       elif found == False:
         newRow, newColumn = self.getPossibleCoords()
-        if currentRow == -1: # if the get possible coords is empty
+        if newRow == -1: # if the get possible coords is empty
           move, newRow, newColumn = self.randomMove()
           return move, newRow, newColumn
         else:
