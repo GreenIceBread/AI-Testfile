@@ -13,14 +13,17 @@ class Board:
     self.number = [1,2,3,4,5,6,7,8] # all of the pissible numbers that a space can be
     self.minecoordinates = minecoordinates
     self.topGrid = [["-" for i in range(self.width)]for j in range(self.height)] # creates the player grid
-    self.dataGrid = [["-" for i in range(self.width)]for j in range(self.height)] # creates the data grid
+    self.dataGrid = [['*', 1, '-', '-', '-', '-', '-', '-', 1, '*'], [1, 1, '-', '-', '-', '-', '-', '-', 1, 1], ['-', '-', '-', '-', '-', 1, 1, 1, '-', '-'], ['-', '-', 1, 1, 1, 1, '*', 1, 1, 1], 
+['-', '-', 1, '*', 2, 3, 2, 2, 1, '*'], [1, 1, 2, 2, '*', 2, '*', 2, 3, 2], [1, '*', 2, 2, 3, 4, 4, '*', 2, '*'], [1, 
+1, 2, '*', 2, '*', '*', 2, 2, 1]]
+    #self.dataGrid = [["-" for i in range(self.width)]for j in range(self.height)] # creates the data grid
     self.offsets = [(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1),(-1,-1)] # offsets used for uncovering
     self.area = (self.height*self.width) - self.mines
-    if self.minecoordinates == []:
-      self._generateMines() # if there are no mine coordinates then generate them
-    else:
-      self._placeMines() # otherwise place the mines in the right spots
-      self._placeNumbers() # and place numbers around the mines
+    #if self.minecoordinates == []:
+     # self._generateMines() # if there are no mine coordinates then generate them
+    #else:
+     # self._placeMines() # otherwise place the mines in the right spots
+      #self._placeNumbers() # and place numbers around the mines
 
       
   def getMinecoordinates(self):

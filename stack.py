@@ -4,10 +4,16 @@ class Stack:
     self.items = []
 
   def _isEmpty(self):
-    return len(self.items) == 0
-
+    if len(self.items) == 0:
+      return True
+    else:
+      return False
+    
   def _isFull(self):
-    return len(self.items) == self.maxsize
+    if len(self.items) == self.maxsize:
+      return True
+    else:
+      return False
 
   def push(self,item):
     if not self._isFull():
@@ -27,3 +33,9 @@ class Stack:
 
   def showStack(self):#for testing
     print(self.items)
+
+  def _hasItem(self,coord):
+    if coord in self.items:
+      return True
+    else:
+      return False

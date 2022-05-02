@@ -13,15 +13,16 @@ class PlayGame:
     self.mines = 13
     self.aiBoard = Board(self.mines, self.height, self.width, [])
     self.ai = Ai(self.aiBoard.topGrid, self.height, self.width, self.mines)
-    self._game()
+
 
   def _game(self):
     self.aiBoard.showGrid(self.aiBoard.topGrid)
     self.aiBoard.showGrid(self.aiBoard.dataGrid)
+    print(self.aiBoard.dataGrid)
     run = True
     end = False
     # first move which is always random
-    move, firstRow, firstColumn = self.ai.randomMove()
+    move, firstRow, firstColumn = "U", 2, 0 #self.ai.randomMove()
     if firstRow in range(0, self.height) and firstColumn in range(0, self.width):
       end, win = self.move(move, firstRow, firstColumn)
       if end == False:
