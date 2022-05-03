@@ -66,10 +66,10 @@ class PlayGame:
   
   def _win(self):
     print("AI WON")
-
+    self.aiBoard.showGrid(self.aiBoard.dataGrid)
 
   def _gameover(self):
     print("AI LOST")
-
+    self.aiBoard.showGrid(self.aiBoard.dataGrid)
  
     

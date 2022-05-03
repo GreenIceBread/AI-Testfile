@@ -19,7 +19,7 @@ class Ai():
 
   def getMove(self, currentRow, currentColumn):
     move, row, column = self._chooseMove(currentRow, currentColumn)
-    if self.topGrid[row][column] != "-":
+    while self.topGrid[row][column] != "-":
       move, row, column = self._chooseMove(currentRow, currentColumn)
     print("These are visited")
     print(self.visited)
