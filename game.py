@@ -22,7 +22,7 @@ class PlayGame:
     run = True
     end = False
     # first move which is always random
-    move, firstRow, firstColumn = "U", 2, 0 #self.ai.randomMove()
+    move, firstRow, firstColumn = self.ai.randomMove()
     if firstRow in range(0, self.height) and firstColumn in range(0, self.width):
       end, win = self.move(move, firstRow, firstColumn)
       if end == False:
